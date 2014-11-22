@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     livereload = require('connect-livereload'),
+    gulp_livereload = require('gulp-livereload'),
     connect = require('connect'),
     serveStatic = require('serve-static')
     browserify = require('gulp-browserify')
@@ -33,6 +34,13 @@ gulp.task('html', ['assets'], function(){
       .pipe(gulp.dest('./.tmp/'));
 });
 
+gulp.task('jshint', function () {
+  return gulp.src(["./app/**/*.js"])
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
+});
+
 gulp.task('browserify', function(){
  gulp.src("./app/index.js")
    .pipe(browserify({
@@ -57,7 +65,7 @@ gulp.task('browserify', function(){
 });
 
 gulp.task('watch',['browserify', 'html', 'connect'], function(){
-  var server = livereload.listen();
+  var server = gulp_livereload.listen();
   gulp.watch([
         './.tmp/**/*'
     ]).on('change', function(file) {
