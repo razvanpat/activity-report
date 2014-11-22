@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     serveStatic = require('serve-static')
     browserify = require('gulp-browserify')
     jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish');
+    stylish = require('jshint-stylish'),
+    less = require('gulp-less');
 
 gulp.task('default', function() {
   // place code for your default task here
@@ -24,8 +25,8 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('assets', function() {
-    return gulp.src('app/assets/**/*')
+gulp.task('assets', ['less'], function() {
+    return gulp.src('./assets/**/*')
         .pipe(gulp.dest('./.tmp/assets/'));
 });
 
@@ -40,6 +41,12 @@ gulp.task('jshint', function () {
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));
 });
+
+gulp.task('less', function() {
+	return gulp.src(['./bower_components/bootstrap/less/bootstrap.less'])
+		.pipe(less())
+		.pipe(gulp.dest('./assets/css'));
+})
 
 gulp.task('browserify', function(){
  gulp.src("./app/index.js")
