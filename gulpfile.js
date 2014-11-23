@@ -25,7 +25,7 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('assets', ['less'], function() {
+gulp.task('assets', function() {
     return gulp.src('./assets/**/*')
         .pipe(gulp.dest('./.tmp/assets/'));
 });
@@ -41,13 +41,13 @@ gulp.task('jshint', function () {
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));
 });
-
+/*
 gulp.task('less', function() {
 	return gulp.src(['./bower_components/bootstrap/less/bootstrap.less'])
 		.pipe(less())
 		.pipe(gulp.dest('./assets/css'));
 })
-
+*/
 gulp.task('browserify', function(){
  gulp.src("./app/index.js")
    .pipe(browserify({
@@ -67,7 +67,7 @@ gulp.task('browserify', function(){
           }
         }
       }
-   })) 
+   }))
    .pipe(gulp.dest('./.tmp/'));
 });
 
@@ -86,10 +86,10 @@ gulp.task('watch',['browserify', 'html', 'connect'], function(){
     });
 
 
-  gulp.watch(['./app/**/*.html', './app/assets/**/*'], ['html']).on('error', function(error){
+  gulp.watch(['app/**/*.html', 'app/assets/**/*'], ['html']).on('error', function(error){
     console.warn(error);
   });
-  gulp.watch('./app/**/*.js', ['jshint', 'browserify']).on('error', function (error){
+  gulp.watch('app/**/*.js', ['jshint', 'browserify']).on('error', function (error){
     console.warn(error);
   });
 });

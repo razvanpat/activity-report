@@ -21,6 +21,14 @@ app.config(['$routeProvider', function ($routeProvider) {
     controller : 'HomeCtrl'
     //resolve: resolver
   })
+  .when('/report_list', {
+    templateUrl : '/components/report_list/report_list_view.html',
+    controller : 'ReportListCtrl'
+  })
+  .when('/create_report', {
+    templateUrl : '/components/create_report/create_report_view.html',
+    controller : 'CreateReportCtrl'
+  })
   .otherwise({
     redirectTo : "/"
   });
