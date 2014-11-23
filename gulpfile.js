@@ -86,7 +86,7 @@ gulp.task('watch',['browserify', 'html', 'connect'], function(){
     });
 
 
-  gulp.watch(['app/**/*.html', 'app/assets/**/*'], ['html']).on('error', function(error){
+  gulp.watch(['app/**/*.html', 'assets/**/*'], ['html']).on('error', function(error){
     console.warn(error);
   });
   gulp.watch('app/**/*.js', ['jshint', 'browserify']).on('error', function (error){
