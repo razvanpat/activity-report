@@ -1,13 +1,23 @@
 <h1>Create Report</h1>
 
-<br/>
+    <br/>
 
-<div class="col-sm-6">
+    <div class="col-sm-6">
     <form role="form">
+        <div class="form-group">
+            <label>Number</label>
+            <input type="text" class="form-control" value="61" />
+        </div>
+        <div class="form-group">
+            <label>Service Provider</label>
+            <select class="form-control">
+                <option>SC Toolworks SRL</option>
+            </select>
+        </div>
         <div class="form-group">
             <label>Customer</label>
             <select class="form-control">
-                <option>berg Computers</option>
+                <option>SC Berg Computers SRL</option>
             </select>
         </div>
         <div class="form-group">
@@ -26,6 +36,31 @@
                 </select>
             </div>
         </div>
+        <div class="form-group">
+            <label>Report Date</label>
+
+            <div class="form-inline">
+                <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+                <select class="form-control">
+                    <option>July</option>
+                    <option>August</option>
+                </select>
+                <select class="form-control">
+                    <option>2013</option>
+                    <option selected>2014</option>
+                    <option>2015</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group form-actions">
             <button type="submit" class="btn btn-default btn-primary">Create</button>
         </div>

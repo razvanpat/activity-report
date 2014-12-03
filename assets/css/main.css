@@ -6,3 +6,7 @@
     float:right;
     margin-top: 28px;
 }
+
+.report-data label {
+    margin-right: 5px;
+}
