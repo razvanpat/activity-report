@@ -1,0 +1,75 @@
+{
+    "reports": [
+        {
+            "period_month": 1,
+            "period_year": 2014,
+            "client": "berg Computers",
+            "created_at": "2/7/2014",
+            "number": 61,
+            "invoice_number": 61,
+            "report_number_format": "TWD####",
+            "invoice_number_format": "TWK####",
+            "provider": "Toolworks SRL",
+            "entries": [
+                {
+                    "date_day": 3,
+                    "date_month": 1,
+                    "date_year": 2014,
+                    "project": "Pulse",
+                    "description": "Environment Setup",
+                    "time": 5
+                }, {
+                    "date_day": 4,
+                    "date_month": 1,
+                    "date_year": 2014,
+                    "project": "Pulse",
+                    "description": "Environment Setup",
+                    "time": 5
+                }, {
+                    "date_day": 5,
+                    "date_month": 1,
+                    "date_year": 2014,
+                    "project": "Pulse",
+                    "description": "Environment Setup",
+                    "time": 5
+                }, {
+                    "date_day": 6,
+                    "date_month": 1,
+                    "date_year": 2014,
+                    "project": "Pulse",
+                    "description": "PSA file concatenation",
+                    "time": 5
+                }, {
+                    "date_day": 6,
+                    "date_month": 1,
+                    "date_year": 2014,
+                    "project": "Hypercare",
+                    "description": "Availability",
+                    "time": 7
+                }
+            ]
+        }, {
+            "period_month": 2,
+            "period_year": 2014,
+            "client": "berg Computers",
+            "created_at": "3/5/2014",
+            "number": 62,
+            "invoice_number": 62,
+            "report_number_format": "TWD####",
+            "invoice_number_format": "TWK####",
+            "provider": "Toolworks SRL",
+            "entries": [
+            ]
+        }
+    ],
+
+    "settings": {
+        "default_provider": "Toolworks SRL",
+        "report_number_format": "TWD####",
+        "invoice_number_format": "TWK####",
+        "average_target_hours": 120,
+        "special_projects": [
+            "Hypercare"
+        ]
+    }
+}

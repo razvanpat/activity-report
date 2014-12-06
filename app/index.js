@@ -3,7 +3,7 @@ require('angular-route');
 
 var app = angular.module('ActivityReport', ['ngRoute']);
 require('./controllers');
-//require('./services');
+require('./services');
 
 /*
  var resolver = {
@@ -37,3 +37,15 @@ app.config(['$routeProvider', function ($routeProvider) {
             redirectTo: "/"
         });
 }]);
+
+app.filter('monthName', [function() {
+    return function (monthNumber) { //1 = January
+        var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December' ];
+        return monthNames[monthNumber];
+    };
+}]);
+
+String.prototype.replaceCharacter = function(index, character) {
+    return this.substr(0, index) + character + this.substr(index+character.length);
+};

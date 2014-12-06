@@ -16,6 +16,7 @@
 <table class="table table-hover" style="margin-top: 30px">
     <thead>
         <tr>
+            <th class="checkbox-column"></th>
             <th>Period</th>
             <th>Regular Hours</th>
             <th>Hypercare Hours</th>
@@ -24,45 +25,19 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td><a href="#/report/1">January 2014</a></td>
-            <td>117</td>
-            <td>0</td>
-            <td>berg Computers</td>
-            <td>07 February 2014</td>
+        <tr ng-repeat="report in reports">
+            <td><input type="checkbox" /></td>
+            <td><a href="#/report/{{report.number}}">{{report.period_month | monthName}} {{report.period_year}}</a></td>
+            <td>{{report.totalHours}}</td>
+            <td>{{report.specialHours.Hypercare}}</td>
+            <td>{{report.client}}</td>
+            <td>!07 February 2014</td>
         </tr>
         <tr>
-            <td>February 2014</td>
-            <td>113</td>
-            <td>0</td>
-            <td>berg Computers</td>
-            <td>11 March 2014</td>
-        </tr>
-        <tr>
-            <td>March 2014</td>
-            <td>126</td>
-            <td>15</td>
-            <td>berg Computers</td>
-            <td>10 April 2014</td>
-        </tr>
-        <tr>
-            <td>April 2014</td>
-            <td>120</td>
-            <td>13</td>
-            <td>berg Computers</td>
-            <td>02 May 2014</td>
-        </tr>
-        <tr>
-            <td>May 2014</td>
-            <td>121</td>
-            <td>26</td>
-            <td>berg Computers</td>
-            <td>05 June 2014</td>
-        </tr>
-        <tr>
+            <td></td>
             <th>Average</th>
-            <th>119.25</th>
-            <th>11.5</th>
+            <th>{{averageHours}}</th>
+            <th>{{averageHypercare}}</th>
             <th colspan="2">&nbsp;</th>
         </tr>
     </tbody>
@@ -70,4 +45,5 @@
 
 <div class="form-group form-actions">
     <button type="submit" class="btn btn-default btn-primary">Create Report</button>
+    <button type="submit" class="btn btn-default" disabled="disabled">Delete selected</button>
 </div>

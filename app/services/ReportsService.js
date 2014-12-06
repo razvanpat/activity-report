@@ -1,0 +1,73 @@
+var _ = require('lodash');
+var fixtures = require('../../assets/fixtures.json');
+
+module.exports = function ReportsService() {
+    var reports = fixtures.reports;
+    var settings = fixtures.settings;
+
+    function getTotalHoursForReport(report) {
+        return _.reduce(report.entries, function (hours, entry) {
+            hours += entry.time;
+            return hours;
+        }, 0);
+    }
+
+    function getSpecialHoursForReport(report) {
+        var specialHours = _.reduce(settings.special_projects, function (result, project) {
+            result[project] = 0;
+            return result;
+        }, {});
+        return _.reduce(report.entries, function (result, entry) {
+            _.forEach(settings.special_projects, function (project) {
+                if (entry.project === project) {
+                    result[project] += entry.time;
+                }
+            });
+            return result;
+        }, specialHours);
+    }
+
+    function formatNumber(format, number) {
+        var nr = number.toString();
+        var result = format;
+        var i;
+        var ni = nr.length - 1;
+        for(i = result.length - 1; i > 0; i--) {
+            if(result.charAt(i) == '#') {
+                result = result.replaceCharacter(i, ni >= 0 ? nr.charAt(ni--) : '0');
+            }
+        }
+        return result;
+    }
+
+    _.forEach(reports, function (report) {
+        report.totalHours = getTotalHoursForReport(report);
+        report.specialHours = getSpecialHoursForReport(report);
+        report.formatted_report_number = formatNumber(report.report_number_format, report.number);
+        report.formatted_invoice_number = formatNumber(report.invoice_number_format, report.invoice_number);
+    });
+
+    return {
+        getReports: function () {
+            return reports;
+        },
+
+        getReport: function (reportNumber) {
+            var result = null;
+            _.forEach(reports, function (report) {
+                if (report.number == reportNumber) {
+                    result = report;
+                }
+            });
+            return result;
+        },
+
+        addEntry: function(reportNumber, entryData) {
+            var report = _.find(reports, function(r) {
+                return r.number == reportNumber;
+            });
+
+            report.entries.push(entryData);
+        }
+    };
+};

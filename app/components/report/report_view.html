@@ -5,31 +5,35 @@
 <div class="report-data">
     <div class="col-md-6 col-lg-4">
         <label>Number:</label>
-        TWD0050
+        {{report.formatted_report_number}}
     </div>
     <div class="col-md-6 col-lg-4">
         <label>Date:</label>
-        01 July 2014
+        !01 July 2014
     </div>
     <div class="col-md-6 col-lg-4">
         <label>Invoice#:</label>
-        TWK0050
+        {{report.formatted_invoice_number}}
     </div>
     <div class="col-md-6 col-lg-4">
         <label>Service provider:</label>
-        SC Toolworks SRL
+        {{report.provider}}
     </div>
     <div class="col-md-6 col-lg-4">
         <label>Customer:</label>
-        SC Berg Computers SRL
+        {{report.client}}
     </div>
     <div class="col-md-6 col-lg-4">
         <label>Report Period:</label>
-        June 2014
+        {{report.period_month | monthName}} {{report.period_year}}
     </div>
     <div class="col-md-6 col-lg-4">
         <label>Total hours:</label>
-        110
+        {{report.totalHours}}
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <label>Hypercare hours:</label>
+        {{report.specialHours.Hypercare}}
     </div>
 </div>
 
@@ -37,6 +41,7 @@
     <table class="table table-hover" style="margin-top: 30px">
         <thead>
         <tr>
+            <th class="checkbox-column"></th>
             <th>Date</th>
             <th>Project</th>
             <th>Description</th>
@@ -44,35 +49,23 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>02 June 2014</td>
-            <td>Pulse</td>
-            <td>Environment Setup</td>
-            <td>5</td>
+        <tr ng-if="report.entries.length == 0">
+            <td colspan="5" class="empty-table">No entries</td>
         </tr>
-        <tr>
-            <td>03 June 2014</td>
-            <td>Pulse</td>
-            <td>Environment Setup</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>04 June 2014</td>
-            <td>Pulse</td>
-            <td>Environment Setup</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>05 June 2014</td>
-            <td>Pulse</td>
-            <td>PSA file concatenation</td>
-            <td>5</td>
+        <tr ng-repeat="entry in report.entries">
+            <td><input type="checkbox"/></td>
+            <td>{{entry.date_day}} {{entry.date_month | monthName}} {{entry.date_year}}</td>
+            <td>{{entry.project}}</td>
+            <td>{{entry.description}}</td>
+            <td>{{entry.time}}</td>
         </tr>
         </tbody>
     </table>
 
     <div class="form-group form-actions">
-        <button type="submit" class="btn btn-default btn-primary" data-toggle="modal" data-target="#myModal">Add Entry</button>
+        <button type="submit" class="btn btn-default btn-primary" data-toggle="modal" data-target="#myModal">Add Entry
+        </button>
+        <button type="submit" class="btn btn-default" disabled="disabled">Delete selected</button>
     </div>
 </div>
 
@@ -80,17 +73,39 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form ng-submit="addEntry()">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Entry</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Date:</label>
+
+                        <div class="input-group date">
+                            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Project:</label>
+                        <input class="form-control" type="text" ng-model="project"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Description:</label>
+                        <textarea class="form-control" id="message-text" ng-model="description">
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Time:</label>
+                        <input class="form-control" type="text" ng-model="time"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

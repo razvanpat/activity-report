@@ -10,3 +10,14 @@
 .report-data label {
     margin-right: 5px;
 }
+
+.checkbox-column {
+    width: 30px;
+}
+
+.empty-table {
+    text-align: center;
+    color: #aaaaaa;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+}
