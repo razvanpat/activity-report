@@ -40,6 +40,7 @@ module.exports = function ReportsService() {
         return result;
     }
 
+
     function calculateReportData(report) {
         report.created_at = new Date(report.created_at);
         report.totalHours = getTotalHoursForReport(report);
@@ -72,10 +73,17 @@ module.exports = function ReportsService() {
             reports.push(report);
         },
 
-        deleteSelectedReports: function(report) {
+        deleteSelectedReports: function() {
             _.remove(reports, function(report) {
                 return report.selected;
             });
+        },
+
+        deleteSelectedEntries: function(report) {
+            _.remove(report.entries, function(entry) {
+                return entry.selected;
+            });
+            calculateReportData(report);
         },
 
         addEntry: function(reportNumber, entryData) {
@@ -102,6 +110,18 @@ module.exports = function ReportsService() {
                 }
                 return max;
             }, 1);
+        },
+
+        resetSelectedState: function() {
+            _.forEach(reports, function (report) {
+                report.selected = false;
+            });
+        },
+
+        resetReportSelectedState: function(report) {
+            _.forEach(report.entries, function (entry) {
+                entry.selected = false;
+            });
         }
     };
 };

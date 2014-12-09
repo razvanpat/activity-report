@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 module.exports = function ReportCtrl($scope, $routeParams, $location, ReportsService) {
     $scope.report = ReportsService.getReport($routeParams.reportId);
     if(!$scope.report) {
@@ -27,6 +29,22 @@ module.exports = function ReportCtrl($scope, $routeParams, $location, ReportsSer
         });
 
         $('#myModal').modal('hide');
+    };
+
+    $scope.updateDeleteBtnState = function () {
+        $scope.deleteDisabled = !_.reduce($scope.report.entries, function (result, entry) {
+            return entry || entry.selected;
+        }, false);
+    };
+    $scope.updateDeleteBtnState();
+
+    $scope.deleteEntries = function () {
+        if (confirm('Are you sure?')) {
+            ReportsService.deleteSelectedEntries($scope.report);
+        } else {
+            ReportsService.resetReportSelectedState($scope.report);
+        }
+        $scope.updateDeleteBtnState();
     };
 
 

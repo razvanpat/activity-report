@@ -14,30 +14,23 @@ module.exports = function ReportListCtrl($scope, $location, ReportsService) {
         }, 0);
     }
 
-    function resetSelectedState() {
-        _.forEach($scope.reports, function (report) {
-            report.selected = false;
-        });
-
-        $scope.deleteDisabled = true;
-    }
-
     calculateHours();
-    resetSelectedState();
 
-    $scope.checkboxClicked = function () {
+    $scope.updateDeleteBtnState = function () {
         $scope.deleteDisabled = !_.reduce($scope.reports, function (result, report) {
             return result || report.selected;
         }, false);
     };
+    $scope.updateDeleteBtnState();
 
     $scope.deleteReports = function () {
         if (confirm('Are you sure?')) {
             ReportsService.deleteSelectedReports();
             calculateHours();
         } else {
-            resetSelectedState();
+            ReportsService.resetSelectedState();
         }
+        $scope.updateDeleteBtnState();
     };
 
     $scope.createReport = function () {

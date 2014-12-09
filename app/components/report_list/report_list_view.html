@@ -29,7 +29,7 @@
             <td colspan="6" class="empty-table">No entries</td>
         </tr>
         <tr ng-repeat="report in reports">
-            <td><input ng-model="report.selected" ng-click="checkboxClicked()" type="checkbox" /></td>
+            <td><input ng-model="report.selected" ng-click="updateDeleteBtnState()" type="checkbox" /></td>
             <td><a href="#/report/{{report.number}}">{{report.period_month | monthName}} {{report.period_year}}</a></td>
             <td>{{report.totalHours}}</td>
             <td>{{report.specialHours.Hypercare}}</td>
