@@ -4,7 +4,7 @@
             "period_month": 1,
             "period_year": 2014,
             "client": "berg Computers",
-            "created_at": "2/7/2014",
+            "created_at": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
             "number": 61,
             "invoice_number": 61,
             "report_number_format": "TWD####",
@@ -52,7 +52,7 @@
             "period_month": 2,
             "period_year": 2014,
             "client": "berg Computers",
-            "created_at": "3/5/2014",
+            "created_at": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
             "number": 62,
             "invoice_number": 62,
             "report_number_format": "TWD####",
@@ -70,6 +70,9 @@
         "average_target_hours": 120,
         "special_projects": [
             "Hypercare"
+        ],
+        "customers": [
+            "SC Berg Computers SRL"
         ]
     }
 }

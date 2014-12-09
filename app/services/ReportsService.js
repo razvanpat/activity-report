@@ -40,11 +40,16 @@ module.exports = function ReportsService() {
         return result;
     }
 
-    _.forEach(reports, function (report) {
+    function calculateReportData(report) {
+        report.created_at = new Date(report.created_at);
         report.totalHours = getTotalHoursForReport(report);
         report.specialHours = getSpecialHoursForReport(report);
         report.formatted_report_number = formatNumber(report.report_number_format, report.number);
         report.formatted_invoice_number = formatNumber(report.invoice_number_format, report.invoice_number);
+    }
+
+    _.forEach(reports, function (report) {
+        calculateReportData(report);
     });
 
     return {
@@ -62,12 +67,41 @@ module.exports = function ReportsService() {
             return result;
         },
 
+        addReport: function(report) {
+            calculateReportData(report);
+            reports.push(report);
+        },
+
+        deleteSelectedReports: function(report) {
+            _.remove(reports, function(report) {
+                return report.selected;
+            });
+        },
+
         addEntry: function(reportNumber, entryData) {
             var report = _.find(reports, function(r) {
                 return r.number == reportNumber;
             });
 
             report.entries.push(entryData);
+        },
+
+        getLastReportNumber: function() {
+            return _.reduce(reports, function(max, report) {
+                if(report.number > max) {
+                    max = report.number;
+                }
+                return max;
+            }, 1);
+        },
+
+        getLastInvoiceNumber: function() {
+            return _.reduce(reports, function(max, report) {
+                if(report.invoice_number > max) {
+                    max = report.invoice_number;
+                }
+                return max;
+            }, 1);
         }
     };
 };
