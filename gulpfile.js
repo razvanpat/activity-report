@@ -1,12 +1,21 @@
+/* global module, $ */
+
+(function () {
+    'use strict';
+}());
+
+
 var gulp = require('gulp'),
     livereload = require('connect-livereload'),
     gulp_livereload = require('gulp-livereload'),
     connect = require('connect'),
-    serveStatic = require('serve-static')
-    browserify = require('gulp-browserify')
+    serveStatic = require('serve-static'),
+    browserify = require('gulp-browserify'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
-    less = require('gulp-less');
+    less = require('gulp-less'),
+    runSequence = require('run-sequence'),
+    mocha = require('gulp-mocha');
 
 gulp.task('default', function() {
   // place code for your default task here
@@ -71,7 +80,7 @@ gulp.task('browserify', function(){
    .pipe(gulp.dest('./.tmp/'));
 });
 
-gulp.task('watch',['browserify', 'html', 'connect'], function(){
+gulp.task('watch',['jshint', 'browserify', 'html', 'connect'], function(){
   var server = gulp_livereload.listen();
   gulp.watch([
         './.tmp/**/*'
@@ -92,4 +101,36 @@ gulp.task('watch',['browserify', 'html', 'connect'], function(){
   gulp.watch('app/**/*.js', ['jshint', 'browserify']).on('error', function (error){
     console.warn(error);
   });
+});
+
+
+function handleError(err) {
+    console.log(err.toString());
+    this.emit('end');
+}
+
+gulp.task('jshint', function () {
+    return gulp.src(["./app/**/*.js"])
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish))
+        .pipe(jshint.reporter('fail'));
+});
+
+
+gulp.task('test',function (callback) {
+    runSequence('jshint', 'test-nojshint', function(){
+        callback();
+    });
+});
+
+gulp.task('test-nojshint', function(){
+    return gulp.src('app/**/*.spec.js')
+        .pipe(mocha({
+            reporter :'spec'
+        }))
+        .on('error', handleError);
+});
+
+gulp.task('test-watch', ['test'], function(){
+    gulp.watch(['app/**/*.js'], ['test']).on('error', handleError);
 });

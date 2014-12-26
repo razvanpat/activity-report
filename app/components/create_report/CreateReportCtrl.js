@@ -1,3 +1,9 @@
+/* global module, $ */
+
+(function () {
+    'use strict';
+}());
+
 module.exports = function CreateReportCtrl($scope, $location, SettingsService, ReportsService) {
 
     var settings = SettingsService.getSettings();
