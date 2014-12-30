@@ -9,8 +9,8 @@ module.exports = function CreateReportCtrl($scope, $location, SettingsService, R
     var settings = SettingsService.getSettings();
 
     $scope.number = ReportsService.getLastReportNumber() + 1;
-    $scope.invoice_number = ReportsService.getLastInvoiceNumber() + 1;
-    $scope.selectedProvider = settings.default_provider;
+    $scope.invoiceNumber = ReportsService.getLastInvoiceNumber() + 1;
+    $scope.selectedProvider = settings.defaultProvider;
     $scope.customers = settings.customers;
     $scope.selectedCustomer = settings.customers[0];
 
@@ -42,14 +42,14 @@ module.exports = function CreateReportCtrl($scope, $location, SettingsService, R
         console.log(date.toString());
 
         ReportsService.addReport({
-            "period_month": period.getMonth(),
-            "period_year": period.getFullYear(),
+            "periodMonth": period.getMonth(),
+            "periodYear": period.getFullYear(),
             "client": $scope.selectedCustomer,
-            "created_at": date,
+            "createdAt": date,
             "number": $scope.number,
-            "invoice_number": $scope.invoice_number,
-            "report_number_format": settings.report_number_format,
-            "invoice_number_format": settings.invoice_number_format,
+            "invoiceNumber": $scope.invoiceNumber,
+            "reportNumberFormat": settings.reportNumberFormat,
+            "invoiceNumberFormat": settings.invoiceNumberFormat,
             "provider": $scope.selectedProvider,
             "entries": [
             ]

@@ -1,62 +1,62 @@
 {
     "reports": [
         {
-            "period_month": 1,
-            "period_year": 2014,
+            "periodMonth": 1,
+            "periodYear": 2014,
             "client": "berg Computers",
-            "created_at": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
+            "createdAt": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
             "number": 61,
-            "invoice_number": 61,
-            "report_number_format": "TWD####",
-            "invoice_number_format": "TWK####",
+            "invoiceNumber": 61,
+            "reportNumberFormat": "TWD####",
+            "invoiceNumberFormat": "TWK####",
             "provider": "Toolworks SRL",
             "entries": [
                 {
-                    "date_day": 3,
-                    "date_month": 1,
-                    "date_year": 2014,
+                    "dateDay": 3,
+                    "dateMonth": 1,
+                    "dateYear": 2014,
                     "project": "Pulse",
                     "description": "Environment Setup",
                     "time": 5
                 }, {
-                    "date_day": 4,
-                    "date_month": 1,
-                    "date_year": 2014,
+                    "dateDay": 4,
+                    "dateMonth": 1,
+                    "dateYear": 2014,
                     "project": "Pulse",
                     "description": "Environment Setup",
                     "time": 5
                 }, {
-                    "date_day": 5,
-                    "date_month": 1,
-                    "date_year": 2014,
+                    "dateDay": 5,
+                    "dateMonth": 1,
+                    "dateYear": 2014,
                     "project": "Pulse",
                     "description": "Environment Setup",
                     "time": 5
                 }, {
-                    "date_day": 6,
-                    "date_month": 1,
-                    "date_year": 2014,
+                    "dateDay": 6,
+                    "dateMonth": 1,
+                    "dateYear": 2014,
                     "project": "Pulse",
                     "description": "PSA file concatenation",
                     "time": 5
                 }, {
-                    "date_day": 6,
-                    "date_month": 1,
-                    "date_year": 2014,
+                    "dateDay": 6,
+                    "dateMonth": 1,
+                    "dateYear": 2014,
                     "project": "Hypercare",
                     "description": "Availability",
                     "time": 7
                 }
             ]
         }, {
-            "period_month": 2,
-            "period_year": 2014,
+            "periodMonth": 2,
+            "periodYear": 2014,
             "client": "berg Computers",
-            "created_at": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
+            "createdAt": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
             "number": 62,
-            "invoice_number": 62,
-            "report_number_format": "TWD####",
-            "invoice_number_format": "TWK####",
+            "invoiceNumber": 62,
+            "reportNumberFormat": "TWD####",
+            "invoiceNumberFormat": "TWK####",
             "provider": "Toolworks SRL",
             "entries": [
             ]
@@ -65,10 +65,10 @@
 
     "settings": {
         "default_provider": "Toolworks SRL",
-        "report_number_format": "TWD####",
-        "invoice_number_format": "TWK####",
-        "average_target_hours": 120,
-        "special_projects": [
+        "reportNumberFormat": "TWD####",
+        "invoiceNumberFormat": "TWK####",
+        "averageTargetHours": 120,
+        "specialProjects": [
             "Hypercare"
         ],
         "customers": [

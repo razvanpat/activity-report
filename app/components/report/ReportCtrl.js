@@ -20,9 +20,9 @@ module.exports = function ReportCtrl($scope, $routeParams, $location, ReportsSer
         var date = dp.datepicker('getDate');
 
         ReportsService.addEntry($routeParams.reportId, {
-            "date_day": date.getDate(),
-            "date_month": date.getMonth(),
-            "date_year": date.getFullYear(),
+            "dateDay": date.getDate(),
+            "dateMonth": date.getMonth(),
+            "dateYear": date.getFullYear(),
             "project": $scope.project,
             "description": $scope.description,
             "time": $scope.time

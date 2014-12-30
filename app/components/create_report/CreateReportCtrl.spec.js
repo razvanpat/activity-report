@@ -21,14 +21,24 @@ $ = function(){
 };
 
 describe('CreateReportCtrl', function() {
-    it('defaults $scope.number to highest report number +1', function() {
+    it('initializes fields to default values', function() {
         var $scope = {};
         var $location = {};
         var SettingsService = SpecUtils.mockSettingsService();
         var ReportsService = SpecUtils.mockReportService();
+        var lastReportNumber = ReportsService.getLastReportNumber();
+        var lastInvoiceNumber = ReportsService.getLastInvoiceNumber();
 
         new CreateReportCtrl($scope, $location, SettingsService, ReportsService);
 
-        expect($scope.number).to.eql(SpecUtils.lastReportNumber + 1);
+
+        var expectedDefaultReportNumber = lastReportNumber + 1;
+        expect($scope.number).to.eql(expectedDefaultReportNumber);
+
+        var expectedInvoiceNumber = lastInvoiceNumber + 1;
+        expect($scope.invoiceNumber).to.eql(expectedInvoiceNumber);
+
+
+
     });
 });

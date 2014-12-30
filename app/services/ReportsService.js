@@ -42,11 +42,11 @@ module.exports = function ReportsService() {
 
 
     function calculateReportData(report) {
-        report.created_at = new Date(report.created_at);
+        report.createdAt = new Date(report.createdAt);
         report.totalHours = getTotalHoursForReport(report);
         report.specialHours = getSpecialHoursForReport(report);
-        report.formatted_report_number = formatNumber(report.report_number_format, report.number);
-        report.formatted_invoice_number = formatNumber(report.invoice_number_format, report.invoice_number);
+        report.formattedReportNumber = formatNumber(report.reportNumberFormat, report.number);
+        report.formattedInvoiceNumber = formatNumber(report.invoiceNumberFormat, report.invoiceNumber);
     }
 
     _.forEach(reports, function (report) {
@@ -105,8 +105,8 @@ module.exports = function ReportsService() {
 
         getLastInvoiceNumber: function() {
             return _.reduce(reports, function(max, report) {
-                if(report.invoice_number > max) {
-                    max = report.invoice_number;
+                if(report.invoiceNumber > max) {
+                    max = report.invoiceNumber;
                 }
                 return max;
             }, 1);

@@ -9,16 +9,16 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var utils = {
-    lastReportNumber: 22,
-    lastInvoiceNumber: 55,
-
     mockReportService: function() {
         return {
+            lastReportNumber: 22,
+            lastInvoiceNumber: 55,
+
             getLastReportNumber: function() {
-                return utils.lastReportNumber;
+                return this.lastReportNumber;
             },
             getLastInvoiceNumber: function() {
-                return utils.lastInvoiceNumber;
+                return this.lastInvoiceNumber;
             }
         };
     },
@@ -27,7 +27,8 @@ var utils = {
         return {
             getSettings: function() {
                 return {
-                    customers: [{}]
+                    defaultProvider: "Test Provider",
+                    customers: ["Test Customer"]
                 };
             }
         };
@@ -54,7 +55,7 @@ describe('utils.spec', function() {
             it('returns lastReportNumber', function() {
                 var result = reportService.getLastReportNumber();
 
-                expect(result).to.eql(utils.lastReportNumber);
+                expect(result).to.eql(reportService.lastReportNumber);
             });
         });
 
@@ -63,7 +64,7 @@ describe('utils.spec', function() {
                 var result = reportService.getLastInvoiceNumber();
 
                 expect(result).to.exist;
-                expect(result).to.eql(utils.lastInvoiceNumber);
+                expect(result).to.eql(reportService.lastInvoiceNumber);
             });
         });
     });
@@ -88,12 +89,24 @@ describe('utils.spec', function() {
                 expect(settings).to.exist;
             });
 
-            it('returns an object with customers property as array and at least one customer', function() {
-                var settings = settingsService.getSettings();
+            describe('returned object', function() {
+                var settings;
 
-                expect(settings.customers).to.exist;
-                expect(settings.customers.length).to.be.above(0);
+                beforeEach(function() {
+                    settings = settingsService.getSettings();
+                });
+
+                it('has customers property as array and at least one customer', function() {
+                    expect(settings.customers).to.exist;
+                    expect(settings.customers.length).to.be.above(0);
+                });
+
+                it('has defaultProvider', function() {
+                    expect(settings.defaultProvider).to.be.ok;
+                });
             });
+
+
         });
 
     });
