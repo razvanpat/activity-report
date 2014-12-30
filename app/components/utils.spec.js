@@ -27,8 +27,16 @@ var utils = {
         return {
             getSettings: function() {
                 return {
-                    defaultProvider: "Test Provider",
-                    customers: ["Test Customer"]
+                    defaultProvider: "test provider",
+                    reportNumberFormat: "TWD####",
+                    invoiceNumberFormat: "TWK####",
+                    averageTargetHours: 168,
+                    specialProjects: [
+                        "ProjectX"
+                    ],
+                    customers: [
+                        "MegaCorp Inc."
+                    ]
                 };
             }
         };
@@ -37,8 +45,18 @@ var utils = {
 
 module.exports = utils;
 
+/**
+ * Some syntactic sugar for tests
+ * @returns {*}
+ */
+Array.prototype.first = function () {
+    return this[0];
+};
 
 
+/**
+ * Util metods should have tests too
+ */
 describe('utils.spec', function() {
     describe('mockReportService', function() {
         var reportService;
@@ -83,29 +101,11 @@ describe('utils.spec', function() {
                 expect(getSettings).to.be.an.instanceof(Function);
             });
 
-            it('returns an object', function() {
+            it('returns settings test fixture', function() {
                 var settings = settingsService.getSettings();
 
                 expect(settings).to.exist;
             });
-
-            describe('returned object', function() {
-                var settings;
-
-                beforeEach(function() {
-                    settings = settingsService.getSettings();
-                });
-
-                it('has customers property as array and at least one customer', function() {
-                    expect(settings.customers).to.exist;
-                    expect(settings.customers.length).to.be.above(0);
-                });
-
-                it('has defaultProvider', function() {
-                    expect(settings.defaultProvider).to.be.ok;
-                });
-            });
-
 
         });
 

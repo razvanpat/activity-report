@@ -39,8 +39,6 @@ module.exports = function CreateReportCtrl($scope, $location, SettingsService, R
         var period = reportPeriod.datepicker('getDate');
         var date = reportDate.datepicker('getDate');
 
-        console.log(date.toString());
-
         ReportsService.addReport({
             "periodMonth": period.getMonth(),
             "periodYear": period.getFullYear(),

@@ -64,15 +64,15 @@
     ],
 
     "settings": {
-        "default_provider": "Toolworks SRL",
+        "defaultProvider": "Toolworks SRL",
         "reportNumberFormat": "TWD####",
         "invoiceNumberFormat": "TWK####",
         "averageTargetHours": 120,
         "specialProjects": [
-            "Hypercare"
+            "TechSuport"
         ],
         "customers": [
-            "SC Berg Computers SRL"
+            "MegaCorp Inc."
         ]
     }
 }

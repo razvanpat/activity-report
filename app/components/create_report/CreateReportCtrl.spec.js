@@ -28,6 +28,7 @@ describe('CreateReportCtrl', function() {
         var ReportsService = SpecUtils.mockReportService();
         var lastReportNumber = ReportsService.getLastReportNumber();
         var lastInvoiceNumber = ReportsService.getLastInvoiceNumber();
+        var settings = SettingsService.getSettings();
 
         new CreateReportCtrl($scope, $location, SettingsService, ReportsService);
 
@@ -38,7 +39,10 @@ describe('CreateReportCtrl', function() {
         var expectedInvoiceNumber = lastInvoiceNumber + 1;
         expect($scope.invoiceNumber).to.eql(expectedInvoiceNumber);
 
+        expect($scope.selectedProvider).to.eql(settings.defaultProvider);
 
+        expect($scope.customers).to.eql(settings.customers);
+        expect($scope.selectedCustomer).to.eql(settings.customers.first());
 
     });
 });
