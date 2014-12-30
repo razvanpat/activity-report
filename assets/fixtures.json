@@ -3,7 +3,7 @@
         {
             "periodMonth": 1,
             "periodYear": 2014,
-            "client": "berg Computers",
+            "client": "MegaCorp Inc.",
             "createdAt": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
             "number": 61,
             "invoiceNumber": 61,
@@ -15,35 +15,35 @@
                     "dateDay": 3,
                     "dateMonth": 1,
                     "dateYear": 2014,
-                    "project": "Pulse",
+                    "project": "World Domination",
                     "description": "Environment Setup",
                     "time": 5
                 }, {
                     "dateDay": 4,
                     "dateMonth": 1,
                     "dateYear": 2014,
-                    "project": "Pulse",
+                    "project": "World Domination",
                     "description": "Environment Setup",
                     "time": 5
                 }, {
                     "dateDay": 5,
                     "dateMonth": 1,
                     "dateYear": 2014,
-                    "project": "Pulse",
+                    "project": "World Domination",
                     "description": "Environment Setup",
                     "time": 5
                 }, {
                     "dateDay": 6,
                     "dateMonth": 1,
                     "dateYear": 2014,
-                    "project": "Pulse",
+                    "project": "World Domination",
                     "description": "PSA file concatenation",
                     "time": 5
                 }, {
                     "dateDay": 6,
                     "dateMonth": 1,
                     "dateYear": 2014,
-                    "project": "Hypercare",
+                    "project": "TechSuport",
                     "description": "Availability",
                     "time": 7
                 }
@@ -51,7 +51,7 @@
         }, {
             "periodMonth": 2,
             "periodYear": 2014,
-            "client": "berg Computers",
+            "client": "MegaCorp Inc.",
             "createdAt": "Sun Dec 07 2014 13:35:31 GMT+0200 (EET)",
             "number": 62,
             "invoiceNumber": 62,
