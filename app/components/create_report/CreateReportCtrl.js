@@ -8,46 +8,23 @@ module.exports = function CreateReportCtrl($scope, $location, SettingsService, R
 
     var settings = SettingsService.getSettings();
 
+    var today = new Date();
+    var lastMonth = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
+
     $scope.number = ReportsService.getLastReportNumber() + 1;
     $scope.invoiceNumber = ReportsService.getLastInvoiceNumber() + 1;
     $scope.selectedProvider = settings.defaultProvider;
     $scope.customers = settings.customers;
     $scope.selectedCustomer = settings.customers[0];
-
-
-    //TODO: Build this crap into a directive
-    var reportDate = $('.input-group.date.days').datepicker({
-        format: "dd MM yyyy",
-        weekStart: 1,
-        autoclose: true
-    });
-
-    var reportPeriod = $('.input-group.date.month-only').datepicker({
-        format: "MM yyyy",
-        weekStart: 1,
-        startView: 1,
-        minViewMode: 1,
-        autoclose: true
-    });
-
-    reportDate.datepicker('update', new Date());
-
-    var today = new Date();
-    var lastMonth = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
-    reportPeriod.datepicker('update', new Date(lastMonth));
-
+    $scope.reportPeriod = lastMonth;
     $scope.reportDate = today;
 
-
     $scope.submit = function() {
-        var period = reportPeriod.datepicker('getDate');
-        var date = reportDate.datepicker('getDate');
-
         ReportsService.addReport({
-            "periodMonth": period.getMonth(),
-            "periodYear": period.getFullYear(),
+            "periodMonth": $scope.reportPeriod.getMonth(),
+            "periodYear": $scope.reportPeriod.getFullYear(),
             "client": $scope.selectedCustomer,
-            "createdAt": date,
+            "createdAt": $scope.reportDate,
             "number": $scope.number,
             "invoiceNumber": $scope.invoiceNumber,
             "reportNumberFormat": settings.reportNumberFormat,
