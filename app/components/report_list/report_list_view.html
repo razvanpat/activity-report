@@ -30,11 +30,11 @@
         </tr>
         <tr ng-repeat="report in reports">
             <td><input ng-model="report.selected" ng-click="updateDeleteBtnState()" type="checkbox" /></td>
-            <td><a href="#/report/{{report.number}}">{{report.period_month | monthName}} {{report.period_year}}</a></td>
+            <td><a href="#/report/{{report.number}}">{{report.periodMonth | monthName}} {{report.periodYear}}</a></td>
             <td>{{report.totalHours}}</td>
             <td>{{report.specialHours.Hypercare}}</td>
             <td>{{report.client}}</td>
-            <td>{{report.created_at | date : 'dd MMM yyyy'}}</td>
+            <td>{{report.createdAt | date : 'dd MMM yyyy'}}</td>
         </tr>
         <tr ng-if="reports.length > 0">
             <td></td>

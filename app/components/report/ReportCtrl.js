@@ -6,23 +6,13 @@ module.exports = function ReportCtrl($scope, $routeParams, $location, ReportsSer
         $location.url('/');
     }
 
-    //TODO: Build this crap into a directive
-    var dp = $('.input-group.date').datepicker({
-        format: "dd MM yyyy",
-        weekStart: 1,
-        autoclose: true
-    });
-
-    dp.datepicker('update', new Date(2014, 0, 3));
-
+    $scope.date = new Date(2014, 0, 3);
 
     $scope.addEntry = function() {
-        var date = dp.datepicker('getDate');
-
         ReportsService.addEntry($routeParams.reportId, {
-            "dateDay": date.getDate(),
-            "dateMonth": date.getMonth(),
-            "dateYear": date.getFullYear(),
+            "dateDay": $scope.date.getDate(),
+            "dateMonth": $scope.date.getMonth(),
+            "dateYear": $scope.date.getFullYear(),
             "project": $scope.project,
             "description": $scope.description,
             "time": $scope.time
