@@ -1,4 +1,4 @@
-/* global module, $ */
+/* global module, $, require */
 
 (function () {
     'use strict';
@@ -45,7 +45,7 @@ gulp.task('html', ['assets'], function(){
 });
 
 gulp.task('jshint', function () {
-  return gulp.src(["./app/**/*.js"])
+  return gulp.src(['./app/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));

@@ -1,3 +1,9 @@
+/* global require */
+
+(function () {
+    'use strict';
+}());
+
 var app = require('angular').module('ActivityReport');
 
 app.controller('HomeCtrl', require('./components/home/HomeCtrl'));

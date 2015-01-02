@@ -1,9 +1,16 @@
+/* global require */
+
+(function () {
+    'use strict';
+}());
+
 var angular = require('angular');
 require('angular-route');
 
 var app = angular.module('ActivityReport', ['ngRoute']);
 require('./controllers');
 require('./services');
+require('./directives');
 
 /*
  var resolver = {

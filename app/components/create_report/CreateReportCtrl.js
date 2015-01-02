@@ -14,6 +14,7 @@ module.exports = function CreateReportCtrl($scope, $location, SettingsService, R
     $scope.customers = settings.customers;
     $scope.selectedCustomer = settings.customers[0];
 
+
     //TODO: Build this crap into a directive
     var reportDate = $('.input-group.date.days').datepicker({
         format: "dd MM yyyy",
@@ -34,6 +35,9 @@ module.exports = function CreateReportCtrl($scope, $location, SettingsService, R
     var today = new Date();
     var lastMonth = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
     reportPeriod.datepicker('update', new Date(lastMonth));
+
+    $scope.reportDate = today;
+
 
     $scope.submit = function() {
         var period = reportPeriod.datepicker('getDate');
