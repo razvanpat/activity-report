@@ -1,40 +1,40 @@
 <h1>Create Report</h1>
 
-    <br/>
+<br/>
 
-    <div class="col-md-8 col-lg-6">
-    <form ng-submit="submit()">
-        <div class="form-group">
-            <label>Number</label>
-            <input ng-model="number" type="text" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Invoice number</label>
-            <input ng-model="invoiceNumber" type="text" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Service Provider</label>
-            <select ng-model="selectedProvider" class="form-control" disabled="disabled">
-                <option selected="selected">{{selectedProvider}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Customer</label>
-            <select ng-model="selectedCustomer" class="form-control">
-                <option ng-repeat="customer in customers">{{customer}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Report Period</label>
-            <twk-calendar-input ng-model="reportPeriod" type="month" />
-        </div>
-        <div class="form-group">
-            <label>Report Date</label>
-            <twk-calendar-input ng-model="reportDate" />
-        </div>
+<div class="col-md-8 col-lg-6">
+	<form ng-submit="submit()">
+		<div class="form-group">
+			<label>Number</label>
+			<input ng-model="number" type="text" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Invoice number</label>
+			<input ng-model="invoiceNumber" type="text" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Service Provider</label>
+			<select ng-model="selectedProvider" class="form-control" disabled="disabled">
+				<option selected="selected">{{selectedProvider}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Customer</label>
+			<select ng-model="selectedCustomer" class="form-control">
+				<option ng-repeat="customer in customers">{{customer}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Report Period</label>
+			<twk-calendar-input ng-model="reportPeriod" type="month"/>
+		</div>
+		<div class="form-group">
+			<label>Report Date</label>
+			<twk-calendar-input ng-model="reportDate"/>
+		</div>
 
-        <div class="form-group form-actions">
-            <button type="submit" class="btn btn-default btn-primary">Create</button>
-        </div>
-    </form>
+		<div class="form-group form-actions">
+			<button type="submit" class="btn btn-default btn-primary">Create</button>
+		</div>
+	</form>
 </div>

@@ -1,7 +1,7 @@
 /* global require */
 
 (function () {
-    'use strict';
+	'use strict';
 }());
 
 var app = require('angular').module('ActivityReport');

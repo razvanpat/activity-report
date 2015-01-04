@@ -1,57 +1,59 @@
 <h1 style="float: left">Report List</h1>
 
 <div class="btn-group page-button">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        2014 <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-        <li><a href="#">2013</a></li>
-        <li><a href="#">2014</a></li>
-    </ul>
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		2014 <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+		<li><a href="#">2013</a></li>
+		<li><a href="#">2014</a></li>
+	</ul>
 </div>
 
 <div style="clear: both"></div>
 
 
 <table class="table table-hover" style="margin-top: 30px">
-    <thead>
-        <tr>
-            <th class="checkbox-column"></th>
-            <th>Period</th>
-            <th>Regular Hours</th>
-            <th>Hypercare Hours</th>
-            <th>Client</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-if="reports.length == 0">
-            <td colspan="6" class="empty-table">No entries</td>
-        </tr>
-        <tr ng-repeat="report in reports">
-            <td><input ng-model="report.selected" ng-click="updateDeleteBtnState()" type="checkbox" /></td>
-            <td><a href="#/report/{{report.number}}">{{report.periodMonth | monthName}} {{report.periodYear}}</a></td>
-            <td>{{report.totalHours}}</td>
-            <td>{{report.specialHours.Hypercare}}</td>
-            <td>{{report.client}}</td>
-            <td>{{report.createdAt | date : 'dd MMM yyyy'}}</td>
-        </tr>
-        <tr ng-if="reports.length > 0">
-            <td></td>
-            <th>Average</th>
-            <th>{{averageHours | number:2}}</th>
-            <th>{{averageHypercare | number:2}}</th>
-            <th colspan="2">&nbsp;</th>
-        </tr>
-    </tbody>
+	<thead>
+	<tr>
+		<th class="checkbox-column"></th>
+		<th>Period</th>
+		<th>Regular Hours</th>
+		<th>Hypercare Hours</th>
+		<th>Client</th>
+		<th>Created At</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-if="reports.length == 0">
+		<td colspan="6" class="empty-table">No entries</td>
+	</tr>
+	<tr ng-repeat="report in reports">
+		<td><input ng-model="report.selected" ng-click="updateDeleteBtnState()" type="checkbox"/></td>
+		<td><a href="#/report/{{report.number}}">{{report.periodMonth | monthName}} {{report.periodYear}}</a></td>
+		<td>{{report.totalHours}}</td>
+		<td>{{report.specialHours.Hypercare}}</td>
+		<td>{{report.client}}</td>
+		<td>{{report.createdAt | date : 'dd MMM yyyy'}}</td>
+	</tr>
+	<tr ng-if="reports.length > 0">
+		<td></td>
+		<th>Average</th>
+		<th>{{averageHours | number:2}}</th>
+		<th>{{averageHypercare | number:2}}</th>
+		<th colspan="2">&nbsp;</th>
+	</tr>
+	</tbody>
 </table>
 
 <div class="form-group form-actions">
-    <button type="submit"
-            ng-click="createReport()"
-            class="btn btn-default btn-primary">Create Report</button>
-    <button type="button"
-            ng-disabled="deleteDisabled"
-            ng-click="deleteReports()"
-            class="btn btn-default" >Delete selected</button>
+	<button type="submit"
+					ng-click="createReport()"
+					class="btn btn-default btn-primary">Create Report
+	</button>
+	<button type="button"
+					ng-disabled="deleteDisabled"
+					ng-click="deleteReports()"
+					class="btn btn-default">Delete selected
+	</button>
 </div>

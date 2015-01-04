@@ -1,24 +1,24 @@
 {
-  "name": "activity-report",
-  "version": "0.0.0",
-  "authors": [
-    "Razvan Pat <razvan.pat@gmail.com>"
-  ],
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular-route": "~1.3.3",
-    "angular": "~1.3.3",
-    "bootstrap": "~3.3.1"
-  },
-  "moduleType": [
-    "node"
-  ]
+	"name": "activity-report",
+	"version": "0.0.0",
+	"authors": [
+		"Razvan Pat <razvan.pat@gmail.com>"
+	],
+	"license": "MIT",
+	"private": true,
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"angular-route": "~1.3.3",
+		"angular": "~1.3.3",
+		"bootstrap": "~3.3.1"
+	},
+	"moduleType": [
+		"node"
+	]
 }
