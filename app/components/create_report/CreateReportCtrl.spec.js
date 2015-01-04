@@ -10,16 +10,6 @@ var expect = chai.expect;
 var SpecUtils = require('../utils.spec');
 var CreateReportCtrl = require('./CreateReportCtrl');
 
-
-//TODO Get rid of this jQuery mock
-$ = function () {
-	return {
-		datepicker: function () {
-			return this;
-		}
-	};
-};
-
 describe('CreateReportCtrl', function () {
 	it('initializes fields to default values', function () {
 		var $scope = {};
@@ -29,6 +19,11 @@ describe('CreateReportCtrl', function () {
 		var lastReportNumber = ReportsService.getLastReportNumber();
 		var lastInvoiceNumber = ReportsService.getLastInvoiceNumber();
 		var settings = SettingsService.getSettings();
+		var today = new Date();
+		var lastMonthDate = new Date(
+			today.getFullYear(), 
+			today.getMonth() - 1, 
+			today.getDate());
 
 		new CreateReportCtrl($scope, $location, SettingsService, ReportsService);
 
@@ -44,5 +39,9 @@ describe('CreateReportCtrl', function () {
 		expect($scope.customers).to.eql(settings.customers);
 		expect($scope.selectedCustomer).to.eql(settings.customers.first());
 
+		expect($scope.reportPeriod.getFullYear())
+				.to.eql(lastMonthDate.getFullYear());
+		expect($scope.reportPeriod.getMonth())
+				.to.eql(lastMonthDate.getMonth());
 	});
 });

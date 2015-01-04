@@ -1,12 +1,27 @@
 var _ = require('lodash');
 
-module.exports = function ReportCtrl($scope, $routeParams, $location, ReportsService) {
+module.exports = function ReportCtrl(
+		$scope, $routeParams, $location, ReportsService) {
+
 	$scope.report = ReportsService.getReport($routeParams.reportId);
 	if (!$scope.report) {
 		$location.url('/');
 	}
 
-	$scope.date = new Date(2014, 0, 3);
+	var firstd = new Date(
+			$scope.report.periodYear,
+			$scope.report.periodMonth,
+ 		 	1);
+	
+	while(firstd.getDay() === 0 || firstd.getDay() == 6) {
+		firstd = new Date(
+				firstd.getFullYear(),
+				firstd.getMonth(),
+				firstd.getDate() + 1
+				);
+	}
+
+	$scope.date = firstd;	
 
 	$scope.addEntry = function () {
 		ReportsService.addEntry($routeParams.reportId, {

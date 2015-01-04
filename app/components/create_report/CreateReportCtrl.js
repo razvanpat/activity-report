@@ -4,12 +4,16 @@
 	'use strict';
 }());
 
-module.exports = function CreateReportCtrl($scope, $location, SettingsService, ReportsService) {
+module.exports = function CreateReportCtrl (
+		$scope, $location, SettingsService, ReportsService) {
 
 	var settings = SettingsService.getSettings();
 
 	var today = new Date();
-	var lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+	var lastMonth = new Date(
+			today.getFullYear(), 
+			today.getMonth() - 1, today.getDate()
+			);
 
 	$scope.number = ReportsService.getLastReportNumber() + 1;
 	$scope.invoiceNumber = ReportsService.getLastInvoiceNumber() + 1;
