@@ -79,5 +79,35 @@ describe('ReportCtrl', function() {
 		});
 	});
 
+	describe('default date for non first entry', function() {
+		it('is the first date after latest entry', function() {
+			var ReportsService = {
+				getReport: function() {
+					return {
+						"periodMonth": 2,
+						"periodYear": 2015,
+						"entries": [
+							{
+								"dateDay": 18,
+								"dateMonth": 2,
+								"dateYear": 2015
+							},{
+								"dateDay": 11,
+								"dateMonth": 2,
+								"dateYear": 2015
+							},
+						]	
+					};
+				}
+			};
+				
+			new ReportCtrl($scope, $routeParams, $location, ReportsService);
+
+			var defaultDate = $scope.date;
+			expect(defaultDate.getDate()).to.eql(19);
+			expect(defaultDate.getMonth()).to.eql(2);
+			expect(defaultDate.getFullYear()).to.eql(2015);
+		});
+	});
 });
 

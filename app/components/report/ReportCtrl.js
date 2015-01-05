@@ -8,10 +8,34 @@ module.exports = function ReportCtrl(
 		$location.url('/');
 	}
 
-	var firstd = new Date(
-			$scope.report.periodYear,
-			$scope.report.periodMonth,
- 		 	1);
+	var firstd;
+	if(!$scope.report.entries || $scope.report.entries.length === 0) {
+		firstd = new Date(
+				$scope.report.periodYear,
+				$scope.report.periodMonth,
+ 		 		1);
+	} else {
+		var latest = _.reduce($scope.report.entries, function(max, entry) {
+				if (entry.dateYear > max.dateYear) 
+					return entry;
+				if (entry.dateYear < max.dateYear)
+					return max;
+				if (entry.dateMonth > max.dateMonth)
+					return entry;
+				if (entry.dateMonth < max.dateMonth)
+					return max;
+				if (entry.dateDay > max.dateDay)
+					return entry;
+				if (entry.dateDay < max.dateDay)
+					return max;
+				return max;	
+			}, $scope.report.entries[0]);
+		firstd = new Date(
+				latest.dateYear,
+				latest.dateMonth,
+				latest.dateDay + 1
+			);
+	}
 	
 	while(firstd.getDay() === 0 || firstd.getDay() == 6) {
 		firstd = new Date(
