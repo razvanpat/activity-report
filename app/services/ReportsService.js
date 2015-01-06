@@ -122,6 +122,6 @@ module.exports = function ReportsService() {
 			_.forEach(report.entries, function (entry) {
 				entry.selected = false;
 			});
-		}
+		},
 	};
 };

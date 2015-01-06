@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 module.exports = function ReportCtrl(
-		$scope, $routeParams, $location, ReportsService) {
+		$scope, $routeParams, $location, ReportsService, Utils) {
 
 	$scope.report = ReportsService.getReport($routeParams.reportId);
 	if (!$scope.report) {
@@ -16,19 +16,7 @@ module.exports = function ReportCtrl(
  		 		1);
 	} else {
 		var latest = _.reduce($scope.report.entries, function(max, entry) {
-				if (entry.dateYear > max.dateYear) 
-					return entry;
-				if (entry.dateYear < max.dateYear)
-					return max;
-				if (entry.dateMonth > max.dateMonth)
-					return entry;
-				if (entry.dateMonth < max.dateMonth)
-					return max;
-				if (entry.dateDay > max.dateDay)
-					return entry;
-				if (entry.dateDay < max.dateDay)
-					return max;
-				return max;	
+				return Utils.latestEntry(max, entry);
 			}, $scope.report.entries[0]);
 		firstd = new Date(
 				latest.dateYear,

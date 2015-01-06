@@ -11,6 +11,8 @@ chai.use(spies);
 
 var SpecUtils = require('../utils.spec');
 var ReportCtrl = require('./ReportCtrl');
+var UtilsModule = require('../../services/Utils');
+var Utils = UtilsModule();
 
 describe('ReportCtrl', function() {
 	var $scope;
@@ -51,7 +53,7 @@ describe('ReportCtrl', function() {
 				}
 			};
 				
-			new ReportCtrl($scope, $routeParams, $location, ReportsService);
+			new ReportCtrl($scope, $routeParams, $location, ReportsService, Utils);
 
 			var defaultDate = $scope.date;
 			expect(defaultDate.getDate()).to.eql(1);
@@ -70,7 +72,7 @@ describe('ReportCtrl', function() {
 				}
 			};
 				
-			new ReportCtrl($scope, $routeParams, $location, ReportsService);
+			new ReportCtrl($scope, $routeParams, $location, ReportsService, Utils);
 
 			var defaultDate = $scope.date;
 			expect(defaultDate.getDate()).to.eql(2);
@@ -88,6 +90,10 @@ describe('ReportCtrl', function() {
 						"periodYear": 2015,
 						"entries": [
 							{
+								"dateDay": 12,
+								"dateMonth": 2,
+								"dateYear": 2015
+							},{
 								"dateDay": 18,
 								"dateMonth": 2,
 								"dateYear": 2015
@@ -101,7 +107,7 @@ describe('ReportCtrl', function() {
 				}
 			};
 				
-			new ReportCtrl($scope, $routeParams, $location, ReportsService);
+			new ReportCtrl($scope, $routeParams, $location, ReportsService, Utils);
 
 			var defaultDate = $scope.date;
 			expect(defaultDate.getDate()).to.eql(19);
