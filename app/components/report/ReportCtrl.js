@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 module.exports = function ReportCtrl(
-		$scope, $routeParams, $location, ReportsService, Utils) {
+		$scope, $routeParams, $location, $document, ReportsService, Utils) {
 
 	$scope.report = ReportsService.getReport($routeParams.reportId);
 	if (!$scope.report) {
@@ -45,12 +45,12 @@ module.exports = function ReportCtrl(
 			"time": $scope.time
 		});
 
-		$('#myModal').modal('hide');
+		$document('#addEntry').modal('hide');
 	};
 
 	$scope.updateDeleteBtnState = function () {
 		$scope.deleteDisabled = !_.reduce($scope.report.entries, function (result, entry) {
-			return entry || entry.selected;
+			return result || entry.selected;
 		}, false);
 	};
 	$scope.updateDeleteBtnState();
