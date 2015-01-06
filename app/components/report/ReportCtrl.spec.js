@@ -134,7 +134,7 @@ describe('ReportCtrl', function() {
 		});
 	});
 
-	describe('$scope.addEntry', function() {
+	describe('$scope.addEntry()', function() {
 		it('uses ReportsService to create entry', function() {
 			var ReportsService = createReportsServiceWithEntries();
 			instantiateReportCtrlWith($scope, ReportsService);
@@ -187,7 +187,7 @@ describe('ReportCtrl', function() {
 			expect($scope.deleteDisabled).to.be.false;
 		});
 
-		it('is updated when calling $scope.updateDeleteBtnState', function() {
+		it('is updated when calling $scope.updateDeleteBtnState()', function() {
 			var ReportsService = createReportsServiceWithEntries();
 				
 			instantiateReportCtrlWith($scope, ReportsService);
@@ -203,7 +203,7 @@ describe('ReportCtrl', function() {
 		});
 	});
 
-	describe('$scope.deleteEntries', function() {
+	describe('$scope.deleteEntries()', function() {
 		it('deletes selected entries if user confirms', function() {
 			var ReportsService = createReportsServiceWithEntries();
 			confirm = function() {
