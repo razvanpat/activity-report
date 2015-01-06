@@ -43,140 +43,101 @@ describe('ReportCtrl', function() {
 
 
 	it('Loads the report specified by reportId param', function() {
-		var ReportsService = {
-			getReport: function(id) {
-				return {
-					id: id
-				};
-			}
-		};	
+		var ReportsService = createReportsServiceWithEntries();
 
 		instantiateReportCtrlWith($scope, ReportsService);
 
-		expect($scope.report.id).to.eql(15);
+		expect($scope.report.id).to.eql(ReportsService.returnedReportId);
 	});
 
 	describe('default date for first entry', function() {
 		it('is the first date of the period', function() {
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 0,
-						"periodYear": 2015,
-						"entries": []	
-					};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
+			ReportsService.returnedPeriodMonth = 0;
+			ReportsService.returnedPeriodYear = 2015;
+			ReportsService.returnedEntries = [];
 				
 			instantiateReportCtrlWith($scope, ReportsService);
 
 			var defaultDate = $scope.date;
 			expect(defaultDate.getDate()).to.eql(1);
-			expect(defaultDate.getMonth()).to.eql(0);
-			expect(defaultDate.getFullYear()).to.eql(2015);
+			expect(defaultDate.getMonth())
+					.to.eql(ReportsService.returnedPeriodMonth);
+			expect(defaultDate.getFullYear())
+					.to.eql(ReportsService.returnedPeriodYear);
 		});
 
 		it('skips over weekend days', function() {
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": []	
-					};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
+			ReportsService.returnedPeriodMonth = 2;
+			ReportsService.returnedPeriodYear = 2015;
+			ReportsService.returnedEntries = [];
 				
 			instantiateReportCtrlWith($scope, ReportsService);
 
 			var defaultDate = $scope.date;
 			expect(defaultDate.getDate()).to.eql(2);
-			expect(defaultDate.getMonth()).to.eql(2);
-			expect(defaultDate.getFullYear()).to.eql(2015);
 		});
 	});
 
 	describe('default date for non first entry', function() {
 		it('is the first date after latest entry', function() {
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 18,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
+			ReportsService.returnedPeriodMonth = 2;
+			ReportsService.returnedPeriodYear = 2015;
+			ReportsService.returnedEntries = [
+					{
+						dateDay: 12,
+						dateMonth: 2,
+						dateYear: 2015
+					},{
+						dateDay: 18,
+						dateMonth: 2,
+						dateYear: 2015
+					},{
+						dateDay: 11,
+						dateMonth: 2,
+						dateYear: 2015
+					}
+				],
 				
 			instantiateReportCtrlWith($scope, ReportsService);
 
 			var defaultDate = $scope.date;
 			expect(defaultDate.getDate()).to.eql(19);
-			expect(defaultDate.getMonth()).to.eql(2);
-			expect(defaultDate.getFullYear()).to.eql(2015);
 		});
 		
 		it('skips over weekend days', function() {
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 20,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
+			ReportsService.returnedPeriodMonth = 2;
+			ReportsService.returnedPeriodYear = 2015;
+			ReportsService.returnedEntries = [
+					{
+						dateDay: 12,
+						dateMonth: 2,
+						dateYear: 2015
+					},{
+						dateDay: 20,
+						dateMonth: 2,
+						dateYear: 2015
+					},{
+						dateDay: 11,
+						dateMonth: 2,
+						dateYear: 2015
+					}
+				],
 				
 			instantiateReportCtrlWith($scope, ReportsService);
 
 			var defaultDate = $scope.date;
 			expect(defaultDate.getDate()).to.eql(23);
-			expect(defaultDate.getMonth()).to.eql(2);
-			expect(defaultDate.getFullYear()).to.eql(2015);
 		});
 	});
 
 	describe('$scope.addEntry', function() {
 		it('uses ReportsService to create entry', function() {
-			var ReportsService = {
-				addEntry: function(reportId, entryObj) {
-					this.reportId = reportId;
-					this.entryObj = entryObj;
-				},
-				getReport: function() {
-					return {};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
 			instantiateReportCtrlWith($scope, ReportsService);
-
 			$scope.date = new Date(2015, 2, 13);
 			$scope.project = "asdfg";
 			$scope.description = "gfdsa";
@@ -184,8 +145,10 @@ describe('ReportCtrl', function() {
 
 			$scope.addEntry();
 
-			expect(ReportsService.reportId).to.be.equal($routeParams.reportId);
-			expect(ReportsService.entryObj).to.be.eql({
+			expect(ReportsService.addEntryReportId)
+					.to.be.equal($routeParams.reportId);
+			expect(ReportsService.addEntryEntryObj)
+					.to.be.eql({
 				dateDay: 13,
 				dateMonth: 2,
 				dateYear: 2015,
@@ -196,13 +159,7 @@ describe('ReportCtrl', function() {
 		});
 
 		it('hides the #addEntry dialog', function() {
-			var ReportsService = {
-				addEntry: function(reportId, entryObj) {
-				},
-				getReport: function() {
-					return {};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
 			instantiateReportCtrlWith($scope, ReportsService);
 
 			$scope.addEntry();
@@ -214,29 +171,7 @@ describe('ReportCtrl', function() {
 
 	describe('$scope.deleteDisabled', function() {
 		it('is true when no entry is selected', function() {
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 18,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
 				
 			instantiateReportCtrlWith($scope, ReportsService);
 
@@ -244,30 +179,8 @@ describe('ReportCtrl', function() {
 		});
 
 		it('is false when at least one entry is selected', function() {
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 18,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
+			ReportsService.returnedEntries[1].selected = true;
 				
 			instantiateReportCtrlWith($scope, ReportsService);
 
@@ -275,164 +188,57 @@ describe('ReportCtrl', function() {
 		});
 
 		it('is updated when calling $scope.updateDeleteBtnState', function() {
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},{
-								"dateDay": 18,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
 				
 			instantiateReportCtrlWith($scope, ReportsService);
-			$scope.report.entries[1].selected = false;
-			$scope.updateDeleteBtnState();
-
-			expect($scope.deleteDisabled).to.be.true;
-
 			$scope.report.entries[1].selected = true;
 			$scope.updateDeleteBtnState();
 
 			expect($scope.deleteDisabled).to.be.false;
+
+			$scope.report.entries[1].selected = false;
+			$scope.updateDeleteBtnState();
+
+			expect($scope.deleteDisabled).to.be.true;
 		});
 	});
 
 	describe('$scope.deleteEntries', function() {
 		it('deletes selected entries if user confirms', function() {
-			var entriesDeleted;
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 18,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				},
-				deleteSelectedEntries: function (report) {
-					entriesDeleted = report;
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
 			confirm = function() {
 				return true;
 			};
-				
 			instantiateReportCtrlWith($scope, ReportsService);
+
 			$scope.deleteEntries();
 			
-			expect(entriesDeleted).to.eql($scope.report);
+			expect(ReportsService.entriesDeleted).to.eql($scope.report);
 		});
 
 		it('resets selection if user cancels', function() {
-			var selectionReset;
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 18,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				},
-				resetReportSelectedState: function (report) {
-					selectionReset = report;
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
 			confirm = function() {
 				return false;
 			};
-				
 			instantiateReportCtrlWith($scope, ReportsService);
+
 			$scope.deleteEntries();
 			
-			expect(selectionReset).to.eql($scope.report);
+			expect(ReportsService.selectionReset).to.eql($scope.report);
 		});
 
 		it('updates delete button state afterwards', function() {
-			var selectionReset;
-			var deleteStateUpdated = false;
-			var ReportsService = {
-				getReport: function() {
-					return {
-						"periodMonth": 2,
-						"periodYear": 2015,
-						"entries": [
-							{
-								"dateDay": 12,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 18,
-								"dateMonth": 2,
-								"dateYear": 2015,
-								"selected": true
-							},{
-								"dateDay": 11,
-								"dateMonth": 2,
-								"dateYear": 2015
-							},
-						]	
-					};
-				},
-				resetReportSelectedState: function (report) {
-					selectionReset = report;
-				}
-			};
+			var ReportsService = createReportsServiceWithEntries();
 			confirm = function() {
 				return false;
 			};
-				
+			var deleteStateUpdated = false;
 			instantiateReportCtrlWith($scope, ReportsService);
 			$scope.updateDeleteBtnState = function() {
 				deleteStateUpdated = true;
 			};
+
 			$scope.deleteEntries();
 
 			expect(deleteStateUpdated).to.be.true;
@@ -443,4 +249,45 @@ describe('ReportCtrl', function() {
 function instantiateReportCtrlWith(_scope, _ReportsService) {
 	return new ReportCtrl(
 			_scope, $routeParams, $location, $document, _ReportsService, Utils);
+}
+
+function createReportsServiceWithEntries() {
+	return {
+		returnedReportId: 123,
+		returnedEntries: [
+			{
+				dateDay: 12,
+				dateMonth: 2,
+				dateYear: 2015
+			},{
+				dateDay: 18,
+				dateMonth: 2,
+				dateYear: 2015
+			},{
+				dateDay: 11,
+				dateMonth: 2,
+				dateYear: 2015
+			}
+		],
+		returnedPeriodMonth: 2,
+		returnedPeriodYear: 2015,	
+		getReport: function() {
+			return {
+				id: this.returnedReportId,
+				periodMonth: this.returnedPeriodMonth,
+				periodYear: this.returnedPeriodYear,
+				entries: this.returnedEntries
+			};
+		},
+		addEntry: function(reportId, entryObj) {
+			this.addEntryReportId = reportId;
+			this.addEntryEntryObj = entryObj;
+		},
+		deleteSelectedEntries: function (report) {
+			this.entriesDeleted = report;
+		},
+		resetReportSelectedState: function (report) {
+			this.selectionReset = report;
+		}
+	};
 }
