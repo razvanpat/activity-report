@@ -10,16 +10,19 @@ var expect = chai.expect;
 var SpecUtils = require('../utils.spec');
 var CreateReportCtrl = require('./CreateReportCtrl');
 
-var $scope = {};
-var $location = {
-	url: function(path) {
-		this.navigatedToPath = path;
-	}
-};
-var SettingsService = SpecUtils.mockSettingsService();
-var settings = SettingsService.getSettings();
+var $scope;
+var $location;
+var SettingsService;
+var settings;
 
 describe('CreateReportCtrl', function () {
+	beforeEach(function() {
+		$scope = {};
+		$location = SpecUtils.createLocationService();
+		SettingsService = SpecUtils.createSettingsService();
+		settings = SettingsService.getSettings();
+	});
+
 	it('initializes fields to default values', function () {
 		var ReportsService = SpecUtils.createReportsServiceWithEntries();
 		var today = new Date();

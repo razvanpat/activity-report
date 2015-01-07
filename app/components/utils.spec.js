@@ -9,6 +9,13 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var utils = {
+	createLocationService: function() {
+		return {
+			url: function(path) {
+				this.navigatedToPath = path;
+			}
+		};
+	},
 	createReportsServiceWithEntries: function() {
 		return {
 			returnedReportId: 123,
@@ -61,7 +68,7 @@ var utils = {
 		};
 	},
 
-	mockSettingsService: function () {
+	createSettingsService: function () {
 		return {
 			getSettings: function () {
 				return {
@@ -96,12 +103,12 @@ Array.prototype.first = function () {
  * Util metods should have tests too
  */
 describe('utils.spec', function () {
-	describe('mockSettingsService', function () {
+	describe('createSettingsService', function () {
 		describe('getSettings', function () {
 			var settingsService;
 
 			beforeEach(function () {
-				settingsService = utils.mockSettingsService();
+				settingsService = utils.createSettingsService();
 			});
 
 			it('is a function', function () {
