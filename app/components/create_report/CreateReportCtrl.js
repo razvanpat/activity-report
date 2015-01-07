@@ -25,16 +25,16 @@ module.exports = function CreateReportCtrl (
 
 	$scope.submit = function () {
 		ReportsService.addReport({
-			"periodMonth": $scope.reportPeriod.getMonth(),
-			"periodYear": $scope.reportPeriod.getFullYear(),
-			"client": $scope.selectedCustomer,
-			"createdAt": $scope.reportDate,
-			"number": $scope.number,
-			"invoiceNumber": $scope.invoiceNumber,
-			"reportNumberFormat": settings.reportNumberFormat,
-			"invoiceNumberFormat": settings.invoiceNumberFormat,
-			"provider": $scope.selectedProvider,
-			"entries": []
+			periodMonth: $scope.reportPeriod.getMonth(),
+			periodYear: $scope.reportPeriod.getFullYear(),
+			client: $scope.selectedCustomer,
+			createdAt: $scope.reportDate,
+			number: $scope.number,
+			invoiceNumber: $scope.invoiceNumber,
+			reportNumberFormat: settings.reportNumberFormat,
+			invoiceNumberFormat: settings.invoiceNumberFormat,
+			provider: $scope.selectedProvider,
+			entries: []
 		});
 
 		$location.url('/report_list');

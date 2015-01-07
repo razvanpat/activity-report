@@ -9,16 +9,54 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var utils = {
-	mockReportService: function () {
+	createReportsServiceWithEntries: function() {
 		return {
-			lastReportNumber: 22,
-			lastInvoiceNumber: 55,
-
-			getLastReportNumber: function () {
-				return this.lastReportNumber;
+			returnedReportId: 123,
+			returnedEntries: [
+				{
+					dateDay: 12,
+					dateMonth: 2,
+					dateYear: 2015
+				},{
+					dateDay: 18,
+					dateMonth: 2,
+					dateYear: 2015
+				},{
+					dateDay: 11,
+					dateMonth: 2,
+					dateYear: 2015
+				}
+			],
+			returnedPeriodMonth: 2,
+			returnedPeriodYear: 2015,	
+			returnedLastReportNumber: 1,
+			returnedLastInvoiceNumber: 1,
+			getReport: function() {
+				return {
+					id: this.returnedReportId,
+					periodMonth: this.returnedPeriodMonth,
+					periodYear: this.returnedPeriodYear,
+					entries: this.returnedEntries
+				};
 			},
-			getLastInvoiceNumber: function () {
-				return this.lastInvoiceNumber;
+			addEntry: function(reportId, entryObj) {
+				this.addEntryReportId = reportId;
+				this.addEntryEntryObj = entryObj;
+			},
+			addReport: function(report) {
+				this.addedReport = report;
+			},
+			deleteSelectedEntries: function (report) {
+				this.entriesDeleted = report;
+			},
+			resetReportSelectedState: function (report) {
+				this.selectionReset = report;
+			},
+			getLastReportNumber: function() {
+				return this.returnedLastReportNumber;
+			},
+			getLastInvoiceNumber: function() {
+				return this.returnedLastInvoiceNumber;
 			}
 		};
 	},
@@ -58,35 +96,6 @@ Array.prototype.first = function () {
  * Util metods should have tests too
  */
 describe('utils.spec', function () {
-	describe('mockReportService', function () {
-		var reportService;
-
-		beforeEach(function () {
-			reportService = utils.mockReportService();
-		});
-
-		it('returns an object', function () {
-			expect(reportService).to.exist;
-		});
-
-		describe('getLastReportNumber', function () {
-			it('returns lastReportNumber', function () {
-				var result = reportService.getLastReportNumber();
-
-				expect(result).to.eql(reportService.lastReportNumber);
-			});
-		});
-
-		describe('getLastInvoiceNumber', function () {
-			it('returns lastInvoiceNumber', function () {
-				var result = reportService.getLastInvoiceNumber();
-
-				expect(result).to.exist;
-				expect(result).to.eql(reportService.lastInvoiceNumber);
-			});
-		});
-	});
-
 	describe('mockSettingsService', function () {
 		describe('getSettings', function () {
 			var settingsService;

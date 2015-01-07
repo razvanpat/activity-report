@@ -14,6 +14,7 @@ var SpecUtils = require('../utils.spec');
 var ReportCtrl = require('./ReportCtrl');
 var UtilsModule = require('../../services/Utils');
 var Utils = UtilsModule();
+var SpecUtils = require('../utils.spec');
 
 var $scope;
 var $location;
@@ -252,42 +253,5 @@ function instantiateReportCtrlWith(_scope, _ReportsService) {
 }
 
 function createReportsServiceWithEntries() {
-	return {
-		returnedReportId: 123,
-		returnedEntries: [
-			{
-				dateDay: 12,
-				dateMonth: 2,
-				dateYear: 2015
-			},{
-				dateDay: 18,
-				dateMonth: 2,
-				dateYear: 2015
-			},{
-				dateDay: 11,
-				dateMonth: 2,
-				dateYear: 2015
-			}
-		],
-		returnedPeriodMonth: 2,
-		returnedPeriodYear: 2015,	
-		getReport: function() {
-			return {
-				id: this.returnedReportId,
-				periodMonth: this.returnedPeriodMonth,
-				periodYear: this.returnedPeriodYear,
-				entries: this.returnedEntries
-			};
-		},
-		addEntry: function(reportId, entryObj) {
-			this.addEntryReportId = reportId;
-			this.addEntryEntryObj = entryObj;
-		},
-		deleteSelectedEntries: function (report) {
-			this.entriesDeleted = report;
-		},
-		resetReportSelectedState: function (report) {
-			this.selectionReset = report;
-		}
-	};
+	return SpecUtils.createReportsServiceWithEntries();
 }
