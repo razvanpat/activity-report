@@ -3,19 +3,20 @@
 
 (function () {
 	'use strict';
-}());
 
 var chai = require('chai');
 var expect = chai.expect;
 var SpecUtils = require('../utils.spec');
 var ReportListCtrl = require('./ReportListCtrl');
+var UtilsModule = require('../../services/Utils');
+var Utils = new UtilsModule();
 
 var $scope;
 var $location;
 var ReportsService;	
 
 function instantiateReportListCtrl(){
-		return new ReportListCtrl($scope, $location, ReportsService);
+		return new ReportListCtrl($scope, $location, ReportsService, Utils);
 }
 
 describe('ReportListCtrl', function() {
@@ -93,3 +94,4 @@ describe('ReportListCtrl', function() {
 		});
 	});
 });
+}());

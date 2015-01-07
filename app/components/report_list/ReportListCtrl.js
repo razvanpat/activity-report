@@ -1,6 +1,11 @@
+/* global module, require */
+
+(function () {
+	'use strict';
+
 var _ = require('lodash');
 
-module.exports = function ReportListCtrl($scope, $location, ReportsService) {
+module.exports = function ReportListCtrl($scope, $location, ReportsService, Utils) {
 	$scope.reports = ReportsService.getReports();
 	//TODO: Hour calculations should be someone else's responsibilty
 /*
@@ -21,10 +26,7 @@ module.exports = function ReportListCtrl($scope, $location, ReportsService) {
 */
 
 	$scope.updateDeleteBtnState = function () {
-		$scope.deleteDisabled = !_.reduce($scope.reports, 
-				function (result, report) {
-					return result || report.selected;
-				}, false);
+		$scope.deleteDisabled = Utils.getActionBtnStateFor($scope.reports);
 	};
 	$scope.updateDeleteBtnState();
 
@@ -42,3 +44,5 @@ module.exports = function ReportListCtrl($scope, $location, ReportsService) {
 		$location.url('/create_report');
 	};
 };
+
+}());

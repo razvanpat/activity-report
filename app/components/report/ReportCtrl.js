@@ -1,3 +1,8 @@
+/* global module, require */
+
+(function () {
+	'use strict';
+	
 var _ = require('lodash');
 
 module.exports = function ReportCtrl(
@@ -49,9 +54,8 @@ module.exports = function ReportCtrl(
 	};
 
 	$scope.updateDeleteBtnState = function () {
-		$scope.deleteDisabled = !_.reduce($scope.report.entries, function (result, entry) {
-			return result || entry.selected;
-		}, false);
+		$scope.deleteDisabled = 
+				Utils.getActionBtnStateFor($scope.report.entries);
 	};
 	$scope.updateDeleteBtnState();
 
@@ -63,6 +67,6 @@ module.exports = function ReportCtrl(
 		}
 		$scope.updateDeleteBtnState();
 	};
-
-
 };
+
+}());

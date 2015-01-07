@@ -2,7 +2,8 @@
 
 (function () {
 	'use strict';
-}());
+
+var _ = require('lodash');
 
 module.exports = function Utils() {
 	return {	
@@ -20,6 +21,14 @@ module.exports = function Utils() {
 			if (entryA.dateDay < entryB.dateDay)
 				return entryB;
 			return entryB;	
+		},
+
+		getActionBtnStateFor: function(collection) {
+			return !_.reduce(collection, 
+					function (result, item) {
+						return result || item.selected;
+					}, false);
 		}		
 	};
 };
+}());

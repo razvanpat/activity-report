@@ -3,7 +3,6 @@
 
 (function () {
 	'use strict';
-}());
 
 var chai = require('chai');
 var expect = chai.expect;
@@ -13,8 +12,7 @@ chai.use(spies);
 var SpecUtils = require('../utils.spec');
 var ReportCtrl = require('./ReportCtrl');
 var UtilsModule = require('../../services/Utils');
-var Utils = UtilsModule();
-var SpecUtils = require('../utils.spec');
+var Utils = new UtilsModule();
 
 var $scope;
 var $location;
@@ -255,3 +253,5 @@ function instantiateReportCtrlWith(_scope, _ReportsService) {
 function createReportsServiceWithEntries() {
 	return SpecUtils.createReportsServiceWithEntries();
 }
+
+}());

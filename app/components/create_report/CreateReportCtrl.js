@@ -2,7 +2,6 @@
 
 (function () {
 	'use strict';
-}());
 
 module.exports = function CreateReportCtrl (
 		$scope, $location, SettingsService, ReportsService) {
@@ -40,3 +39,5 @@ module.exports = function CreateReportCtrl (
 		$location.url('/report_list');
 	};
 };
+
+}());
