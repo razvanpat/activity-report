@@ -42,12 +42,12 @@ module.exports = function ReportCtrl(
 
 	$scope.addEntry = function () {
 		ReportsService.addEntry($routeParams.reportId, {
-			"dateDay": $scope.date.getDate(),
-			"dateMonth": $scope.date.getMonth(),
-			"dateYear": $scope.date.getFullYear(),
-			"project": $scope.project,
-			"description": $scope.description,
-			"time": $scope.time
+			dateDay: $scope.date.getDate(),
+			dateMonth: $scope.date.getMonth(),
+			dateYear: $scope.date.getFullYear(),
+			project: $scope.project,
+			description: $scope.description,
+			time: $scope.time
 		});
 
 		$document('#addEntry').modal('hide');
