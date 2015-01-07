@@ -38,6 +38,10 @@ var utils = {
 			returnedPeriodYear: 2015,	
 			returnedLastReportNumber: 1,
 			returnedLastInvoiceNumber: 1,
+			returnedReportList: [],
+			getReports: function() {
+				return this.returnedReportList;
+			},
 			getReport: function() {
 				return {
 					id: this.returnedReportId,
