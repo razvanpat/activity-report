@@ -5,7 +5,9 @@
 
 var _ = require('lodash');
 
-module.exports = function ReportListCtrl($scope, $location, ReportsService, Utils) {
+module.exports = function ReportListCtrl(
+		$scope, $location, ReportsService, Utils, WindowService) {
+
 	$scope.reports = ReportsService.getReports();
 	//TODO: Hour calculations should be someone else's responsibilty
 /*
@@ -31,7 +33,7 @@ module.exports = function ReportListCtrl($scope, $location, ReportsService, Util
 	$scope.updateDeleteBtnState();
 
 	$scope.deleteReports = function () {
-		if (confirm('Are you sure?')) {
+		if (WindowService.confirm('Are you sure?')) {
 			ReportsService.deleteSelectedReports();
 //			calculateHours();
 		} else {

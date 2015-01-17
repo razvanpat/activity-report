@@ -14,15 +14,18 @@ var Utils = new UtilsModule();
 var $scope;
 var $location;
 var ReportsService;	
+var WindowService;
 
 function instantiateReportListCtrl(){
-		return new ReportListCtrl($scope, $location, ReportsService, Utils);
+		return new ReportListCtrl($scope, $location, ReportsService, Utils,
+			WindowService);
 }
 
 describe('ReportListCtrl', function() {
 	beforeEach(function() {
 		$scope = {};
 		$location = SpecUtils.createLocationService();
+		WindowService = {};
 		ReportsService = SpecUtils.createReportsServiceWithEntries();
 	});
 
@@ -58,7 +61,7 @@ describe('ReportListCtrl', function() {
 			ReportsService.deleteSelectedReports = function() {
 				reportsDeleted = true;
 			};
-			confirm = function() {
+			WindowService.confirm = function() {
 				return true;
 			};
 			instantiateReportListCtrl();
@@ -73,7 +76,7 @@ describe('ReportListCtrl', function() {
 			ReportsService.resetSelectedState = function() {
 				stateReset = true;
 			};
-			confirm = function() {
+			WindowService.confirm = function() {
 				return false;
 			};
 			instantiateReportListCtrl();

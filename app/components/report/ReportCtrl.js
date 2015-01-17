@@ -6,7 +6,8 @@
 var _ = require('lodash');
 
 module.exports = function ReportCtrl(
-		$scope, $routeParams, $location, $document, ReportsService, Utils) {
+		$scope, $routeParams, $location, $document, ReportsService, Utils, 
+		WindowService) {
 
 	$scope.report = ReportsService.getReport($routeParams.reportId);
 	if (!$scope.report) {
@@ -60,7 +61,7 @@ module.exports = function ReportCtrl(
 	$scope.updateDeleteBtnState();
 
 	$scope.deleteEntries = function () {
-		if (confirm('Are you sure?')) {
+		if (WindowService.confirm('Are you sure?')) {
 			ReportsService.deleteSelectedEntries($scope.report);
 		} else {
 			ReportsService.resetReportSelectedState($scope.report);

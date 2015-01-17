@@ -18,6 +18,7 @@ var $scope;
 var $location;
 var $routeParams;
 var $document;
+var WindowService;
 
 var documentTarget;
 var modalParam;
@@ -38,6 +39,7 @@ describe('ReportCtrl', function() {
 		$routeParams = {
 			reportId: 15
 		};
+		WindowService = {};
 	});
 
 
@@ -205,7 +207,7 @@ describe('ReportCtrl', function() {
 	describe('$scope.deleteEntries()', function() {
 		it('deletes selected entries if user confirms', function() {
 			var ReportsService = createReportsServiceWithEntries();
-			confirm = function() {
+			WindowService.confirm = function() {
 				return true;
 			};
 			instantiateReportCtrlWith($scope, ReportsService);
@@ -217,7 +219,7 @@ describe('ReportCtrl', function() {
 
 		it('resets selection if user cancels', function() {
 			var ReportsService = createReportsServiceWithEntries();
-			confirm = function() {
+			WindowService.confirm = function() {
 				return false;
 			};
 			instantiateReportCtrlWith($scope, ReportsService);
@@ -229,7 +231,7 @@ describe('ReportCtrl', function() {
 
 		it('updates delete button state afterwards', function() {
 			var ReportsService = createReportsServiceWithEntries();
-			confirm = function() {
+			WindowService.confirm = function() {
 				return false;
 			};
 			var deleteStateUpdated = false;
@@ -247,7 +249,8 @@ describe('ReportCtrl', function() {
 
 function instantiateReportCtrlWith(_scope, _ReportsService) {
 	return new ReportCtrl(
-			_scope, $routeParams, $location, $document, _ReportsService, Utils);
+			_scope, $routeParams, $location, $document, _ReportsService, Utils, 
+			WindowService);
 }
 
 function createReportsServiceWithEntries() {
