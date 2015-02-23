@@ -74,6 +74,13 @@ gulp.task('browserify', function () {
 					depends: {
 						angular: 'angular'
 					}
+				},
+				'angular-resource': {
+					path: './bower_components/angular-resource/angular-resource.js',
+					exports: 'null',
+					depends: {
+						angular: 'angular'
+					}
 				}
 			}
 		}))

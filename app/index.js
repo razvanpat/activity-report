@@ -6,8 +6,9 @@
 
 var angular = require('angular');
 require('angular-route');
+require('angular-resource');
 
-var app = angular.module('ActivityReport', ['ngRoute']);
+var app = angular.module('ActivityReport', ['ngRoute', 'ngResource']);
 require('./controllers');
 require('./services');
 require('./directives');
